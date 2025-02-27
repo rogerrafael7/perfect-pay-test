@@ -103,9 +103,10 @@ export class AsaasGateway implements PaymentsGateway {
       Logger.log('Cobrança por Pix criada com sucesso:', data);
 
       const paymentId = data.id;
-      const qrCodeResponse = await axios.get<IGetPixQrcodeResponse>(
-        `/${paymentId}/pixQrCode`,
-      );
+      const qrCodeResponse =
+        await this.#axiosInstance.get<IGetPixQrcodeResponse>(
+          `/payments/${paymentId}/pixQrCode`,
+        );
       Logger.log('QR Code Pix:', qrCodeResponse.data);
       return {
         ...data,
