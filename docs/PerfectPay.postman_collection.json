@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "a50302e7-45e6-4eba-966f-86efe1afb724",
+		"name": "PerfectPay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29006644"
+	},
+	"item": [
+		{
+			"name": "1. Login Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"ADMIN_TOKEN\", data.token);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taxId\": \"61033267023\",\n    \"password\": \"61033267023\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Create User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ADMIN_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taxId\": \"78978960057\",\n    \"password\": \"78978960057\",\n    \"name\": \"Teste Custmer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Login Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"CUSTOMER_TOKEN\", data.token);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taxId\": \"78978960057\",\n    \"password\": \"78978960057\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Create Billing",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{CUSTOMER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": {{$randomInt}},\n    \"billingType\": \"BOLETO\",\n    \"dueDate\": \"2025-12-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/payment/billing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"payment",
+						"billing"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": {{$randomInt}},\n    \"billingType\": \"BOLETO\",\n    \"dueDate\": \"2025-12-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/payment/billing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"payment",
+								"billing"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1051"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"41b-Y+Te3Mlm6iNL7FP2TdroaukHG+Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Feb 2025 07:48:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"object\": \"payment\",\n    \"id\": \"pay_cfuldiunuedchlyc\",\n    \"dateCreated\": \"2025-02-27\",\n    \"customer\": \"cus_000006541167\",\n    \"paymentLink\": null,\n    \"value\": 331,\n    \"netValue\": 330.01,\n    \"originalValue\": null,\n    \"interestValue\": null,\n    \"description\": null,\n    \"billingType\": \"BOLETO\",\n    \"canBePaidAfterDueDate\": true,\n    \"pixTransaction\": null,\n    \"status\": \"PENDING\",\n    \"dueDate\": \"2025-12-10\",\n    \"originalDueDate\": \"2025-12-10\",\n    \"paymentDate\": null,\n    \"clientPaymentDate\": null,\n    \"installmentNumber\": null,\n    \"invoiceNumber\": \"07778864\",\n    \"externalReference\": null,\n    \"deleted\": false,\n    \"anticipated\": false,\n    \"anticipable\": false,\n    \"creditDate\": null,\n    \"estimatedCreditDate\": null,\n    \"transactionReceiptUrl\": null,\n    \"nossoNumero\": \"10653267\",\n    \"lastInvoiceViewedDate\": null,\n    \"lastBankSlipViewedDate\": null,\n    \"discount\": {\n        \"value\": 0,\n        \"limitDate\": null,\n        \"dueDateLimitDays\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"fine\": {\n        \"value\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"interest\": {\n        \"value\": 0,\n        \"type\": \"PERCENTAGE\"\n    },\n    \"postalService\": false,\n    \"custody\": null,\n    \"escrow\": null,\n    \"refunds\": null,\n    \"extra\": {\n        \"invoiceUrl\": \"https://sandbox.asaas.com/i/cfuldiunuedchlyc\",\n        \"bankSlipUrl\": \"https://sandbox.asaas.com/b/pdf/cfuldiunuedchlyc\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "5. Get Payment/Billing Status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{CUSTOMER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/payment/5/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"payment",
+						"5",
+						"status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/payment/5/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"payment",
+								"5",
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15-3uff9o4TQxqxG4VUTAQNsxQmcLY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Feb 2025 08:19:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"RECEIVED\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": ""
+		},
+		{
+			"key": "CUSTOMER_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "ADMIN_TOKEN",
+			"value": ""
+		}
+	]
+}
