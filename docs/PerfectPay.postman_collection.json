@@ -133,7 +133,7 @@
 			"response": []
 		},
 		{
-			"name": "4. Create Billing",
+			"name": "4.1. Create Billing(BOLETO)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -171,7 +171,7 @@
 			},
 			"response": [
 				{
-					"name": "Example Response",
+					"name": "Example Response Boleto",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -234,6 +234,148 @@
 					"body": "{\n    \"object\": \"payment\",\n    \"id\": \"pay_cfuldiunuedchlyc\",\n    \"dateCreated\": \"2025-02-27\",\n    \"customer\": \"cus_000006541167\",\n    \"paymentLink\": null,\n    \"value\": 331,\n    \"netValue\": 330.01,\n    \"originalValue\": null,\n    \"interestValue\": null,\n    \"description\": null,\n    \"billingType\": \"BOLETO\",\n    \"canBePaidAfterDueDate\": true,\n    \"pixTransaction\": null,\n    \"status\": \"PENDING\",\n    \"dueDate\": \"2025-12-10\",\n    \"originalDueDate\": \"2025-12-10\",\n    \"paymentDate\": null,\n    \"clientPaymentDate\": null,\n    \"installmentNumber\": null,\n    \"invoiceNumber\": \"07778864\",\n    \"externalReference\": null,\n    \"deleted\": false,\n    \"anticipated\": false,\n    \"anticipable\": false,\n    \"creditDate\": null,\n    \"estimatedCreditDate\": null,\n    \"transactionReceiptUrl\": null,\n    \"nossoNumero\": \"10653267\",\n    \"lastInvoiceViewedDate\": null,\n    \"lastBankSlipViewedDate\": null,\n    \"discount\": {\n        \"value\": 0,\n        \"limitDate\": null,\n        \"dueDateLimitDays\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"fine\": {\n        \"value\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"interest\": {\n        \"value\": 0,\n        \"type\": \"PERCENTAGE\"\n    },\n    \"postalService\": false,\n    \"custody\": null,\n    \"escrow\": null,\n    \"refunds\": null,\n    \"extra\": {\n        \"invoiceUrl\": \"https://sandbox.asaas.com/i/cfuldiunuedchlyc\",\n        \"bankSlipUrl\": \"https://sandbox.asaas.com/b/pdf/cfuldiunuedchlyc\"\n    }\n}"
 				}
 			]
+		},
+		{
+			"name": "4.2. Create Billing(PIX)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{CUSTOMER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": {{$randomInt}},\n    \"billingType\": \"PIX\",\n    \"dueDate\": \"2025-12-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/payment/billing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"payment",
+						"billing"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example Response PIX",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": {{$randomInt}},\n    \"billingType\": \"PIX\",\n    \"dueDate\": \"2025-12-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/payment/billing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"payment",
+								"billing"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "6217"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1849-8YOFQmfUi0zDX6Oyf/XmgTK7jUI\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Feb 2025 09:21:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"object\": \"payment\",\n    \"id\": 6,\n    \"dateCreated\": \"2025-02-27\",\n    \"customer\": \"cus_000006541167\",\n    \"paymentLink\": null,\n    \"value\": 588,\n    \"netValue\": 587.01,\n    \"originalValue\": null,\n    \"interestValue\": null,\n    \"description\": null,\n    \"billingType\": \"PIX\",\n    \"pixTransaction\": null,\n    \"status\": \"PENDING\",\n    \"dueDate\": \"2025-12-10\",\n    \"originalDueDate\": \"2025-12-10\",\n    \"paymentDate\": null,\n    \"clientPaymentDate\": null,\n    \"installmentNumber\": null,\n    \"invoiceUrl\": \"https://sandbox.asaas.com/i/ueb6fxk7aj849fws\",\n    \"invoiceNumber\": \"07778918\",\n    \"externalReference\": null,\n    \"deleted\": false,\n    \"anticipated\": false,\n    \"anticipable\": false,\n    \"creditDate\": null,\n    \"estimatedCreditDate\": null,\n    \"transactionReceiptUrl\": null,\n    \"nossoNumero\": null,\n    \"bankSlipUrl\": null,\n    \"lastInvoiceViewedDate\": null,\n    \"lastBankSlipViewedDate\": null,\n    \"discount\": {\n        \"value\": 0,\n        \"limitDate\": null,\n        \"dueDateLimitDays\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"fine\": {\n        \"value\": 0,\n        \"type\": \"FIXED\"\n    },\n    \"interest\": {\n        \"value\": 0,\n        \"type\": \"PERCENTAGE\"\n    },\n    \"postalService\": false,\n    \"custody\": null,\n    \"escrow\": null,\n    \"refunds\": null,\n    \"extra\": {\n        \"success\": true,\n        \"encodedImage\": \"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\",\n        \"payload\": \"00020101021226820014br.gov.bcb.pix2560qrpix-h.bradesco.com.br/9d36b84f-c70b-478f-b95c-12729b90ca255204000053039865406588.005802BR5905ASAAS6009JOINVILLE62070503***6304BAA1\",\n        \"expirationDate\": \"2025-02-27 23:59:59\"\n    },\n    \"externalId\": \"pay_ueb6fxk7aj849fws\"\n}"
+				}
+			]
+		},
+		{
+			"name": "4.3. Create Billing(Credit Card)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{CUSTOMER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": {{$randomInt}},\n    \"billingType\": \"CREDIT_CARD\",\n    \"dueDate\": \"2025-12-10\",\n    \"creditCard\": {\n        \"holderName\": \"marcelo h almeida\",\n        \"number\": \"5162306219378829\",\n        \"expiryMonth\": \"05\",\n        \"expiryYear\": \"2024\",\n        \"ccv\": \"318\"\n    },\n    \"creditCardHolderInfo\": {\n        \"name\": \"Teste Custmer\",\n        \"email\": \"teste.custmer@gmail.com\",\n        \"cpfCnpj\": \"78978960057\",\n        \"postalCode\": \"89223-005\",\n        \"addressNumber\": \"277\",\n        \"addressComplement\": null,\n        \"phone\": \"4738010919\",\n        \"mobilePhone\": \"47998781877\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/payment/billing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"payment",
+						"billing"
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "5. Get Payment/Billing Status",
